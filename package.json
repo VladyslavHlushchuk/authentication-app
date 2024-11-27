@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "@nestjs/config": "^3.3.0",
+    "@nestjs/jwt": "^10.2.0",
     "@nestjs/mapped-types": "*",
+    "jose": "^5.9.6",
     "zod": "^3.23.8"
   },
   "name": "authentication",
