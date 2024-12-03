@@ -45,7 +45,9 @@ const SignInForm = () => {
           <Link className="text-sm underline" href="/auth/signup">
             Sign Up
           </Link>
+          <br />
         </div>
+        <br />
       </div>
     </form>
   );
