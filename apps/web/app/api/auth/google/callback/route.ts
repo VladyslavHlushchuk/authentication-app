@@ -1,7 +1,7 @@
 import { createSession } from "@/lib/session";
+import { Role } from "@/lib/type";
 import { redirect } from "next/navigation";
 import { NextRequest } from "next/server";
-
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -10,12 +10,14 @@ export async function GET(req: NextRequest) {
   const refreshToken = searchParams.get("refreshToken");
   const userId = searchParams.get("userId");
   const name = searchParams.get("name");
+  const role = searchParams.get("role");
 
   if (
     !accessToken ||
     !refreshToken ||
     !userId ||
-    !name 
+    !name ||
+    !role
   )
     throw new Error("Google Ouath Failed!");
 
@@ -23,6 +25,7 @@ export async function GET(req: NextRequest) {
     user: {
       id: userId,
       name: name,
+      role: role as Role,
     },
     accessToken,
     refreshToken,

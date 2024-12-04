@@ -4,11 +4,13 @@ import { jwtVerify, SignJWT } from "jose";
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { Role } from "./type";
 
 export type Session = {
   user: {
     id: string;
     name: string;
+    role: Role;
   };
   accessToken: string;
   refreshToken: string;
@@ -54,7 +56,7 @@ export async function getSession() {
     return payload as Session;
   } catch (err) {
     console.error("Failed to verify the session", err);
-    redirect("/auth/signin");
+    redirect("/auth/sigin");
   }
 }
 

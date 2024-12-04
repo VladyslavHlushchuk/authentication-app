@@ -81,6 +81,7 @@ export async function signIn(
       user: {
         id: result.id,
         name: result.name,
+        role: result.role,
       },
       accessToken: result.accessToken,
       refreshToken: result.refreshToken,
@@ -119,11 +120,12 @@ export const refreshToken = async (
       );
     }
 
-    const { accessToken, refreshToken } =  await response.json();
+    const { accessToken, refreshToken } =
+      await response.json();
     // update session with new tokens
-
-    // await updateTokens({accessToken, refreshToken});
-    const updateRes = await fetch("http://localhost:3000/api/auth/update", {
+    const updateRes = await fetch(
+      "http://localhost:3000/api/auth/update",
+      {
         method: "POST",
         body: JSON.stringify({
           accessToken,
@@ -133,19 +135,6 @@ export const refreshToken = async (
     );
     if (!updateRes.ok)
       throw new Error("Failed to update the tokens");
-
-
-    //   "http://localhost:3000/api/auth/update",
-    //   {
-    //     method: "POST",
-    //     body: JSON.stringify({
-    //       accessToken,
-    //       refreshToken,
-    //     }),
-    //   }
-    // );
-    // if (!updateRes.ok)
-    //   throw new Error("Failed to update the tokens");
 
     return accessToken;
   } catch (err) {
